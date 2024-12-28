@@ -13,33 +13,48 @@ e2 = Entry()
 t1 = Text(width=30, height=5)
 
 def add():
-    t1.insert(END, str(int(e1.get()) + int(e2.get())) + "\n")
+    try:
+        t1.insert(END, str(float(e1.get()) + float(e2.get())) + "\n")
+    except ValueError:
+        t1.insert(END, "Invalid input! Enter numbers only.\n")
 
 def subtract():
-    t1.insert(END, str(int(e1.get()) - int(e2.get())) + "\n")
+    try:
+        t1.insert(END, str(float(e1.get()) - float(e2.get())) + "\n")
+    except ValueError:
+        t1.insert(END, "Invalid input! Enter numbers only.\n")
 
 def multiply():
-    t1.insert(END, str(int(e1.get()) * int(e2.get())) + "\n")
+    try:
+        t1.insert(END, str(float(e1.get()) * float(e2.get())) + "\n")
+    except ValueError:
+        t1.insert(END, "Invalid input! Enter numbers only.\n")
 
 def divide():
     try:
-        t1.insert(END, str(int(e1.get()) / int(e2.get())) + "\n")
+        t1.insert(END, str(float(e1.get()) / float(e2.get())) + "\n")
     except ZeroDivisionError:
         t1.insert(END, "Cannot divide by zero\n")
+    except ValueError:
+        t1.insert(END, "Invalid input! Enter numbers only.\n")
 
 b1 = Button(text="+", bg="white", fg="green", command=add)
 b2 = Button(text="-", bg="white", fg="green", command=subtract)
 b3 = Button(text="*", bg="white", fg="green", command=multiply)
 b4 = Button(text="/", bg="white", fg="green", command=divide)
 
-l1.pack()
-l2.pack()
-e1.pack()
-e2.pack()
-b1.pack()
-b2.pack()
-b3.pack()
-b4.pack()
-t1.pack()
+l1.grid(row=0, column=0, columnspan=2, pady=10)
+l2.grid(row=1, column=0, columnspan=2, pady=10)
+
+e1.grid(row=2, column=0, padx=5, pady=5)
+e2.grid(row=2, column=1, padx=5, pady=5)
+
+b1.grid(row=3, column=0, pady=5)
+b2.grid(row=3, column=1, pady=5)
+b3.grid(row=4, column=0, pady=5)
+b4.grid(row=4, column=1, pady=5)
+
+
+t1.grid(row=6, column=0, columnspan=2, pady=10)
 
 root.mainloop()
